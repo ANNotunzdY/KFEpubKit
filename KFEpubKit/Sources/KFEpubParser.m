@@ -316,6 +316,20 @@
                 }
             }
         }
+        
+        for (DDXMLElement* xmlElement in itemElements)
+        {
+            if ([self isValidNode:xmlElement] && xmlElement.attributes)
+            {
+                NSString *itemId = [[xmlElement attributeForName:@"id"] stringValue];
+                NSString *fallback = [[xmlElement attributeForName:@"fallback"] stringValue];
+                
+                if (fallback)
+                {
+                    manifest[itemId][@"fallback"] = manifest[fallback];
+                }
+            }
+        }
     }
     else
     {
